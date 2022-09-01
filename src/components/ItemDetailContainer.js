@@ -9,7 +9,8 @@ function ItemDetailContainer () {
     const [loading, setLoading] = useState(true)
 
     const { id } = useParams()
-    
+    console.log(id)
+
     useEffect(() => {
         setLoading(true)
         const pedido = fetch("./arrayProductos.json")
