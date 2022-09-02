@@ -14,7 +14,7 @@ const ItemCount = ({ stock, initial, onAdd }) => {
         } else {
             setContador(contador + 1)
             console.log("incrementando");
-            console.log(contador);
+            console.log(contador+1);
         }
     };
 

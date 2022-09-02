@@ -11,7 +11,7 @@ function Item({producto}) {
                 <p>${producto.precio}</p>
                 <p>{producto.descripcion}</p>
                 {/* boton con link */}
-                <Link to={`/item/${producto.id}`} className="btn btn-primary">Ver detalle</Link>
+                <Link to={`/item/${producto.id}`}  className="btn btn-primary">Ver detalle</Link>
             </div>
         </div>
       </div>

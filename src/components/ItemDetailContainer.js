@@ -2,7 +2,7 @@ import React from 'react'
 import ItemDetail from "./ItemDetail"
 import { useEffect, useState } from 'react'
 import { useParams } from "react-router-dom"
-
+import { getProductsById} from "./products.js"
 
 function ItemDetailContainer () {
     const [item, setItem] = useState({})
@@ -12,23 +12,21 @@ function ItemDetailContainer () {
     console.log(id)
 
     useEffect(() => {
-        setLoading(true)
-        const pedido = fetch("./arrayProductos.json")
-        pedido.then(res => {
-            return res.json()
-        }).then(res => {
+        getProductsById(id)
+        .then(item => {
+            setItem(item)
             setLoading(false)
-            setItem(res.filter(item => item.id === parseInt(id)))
-        }).catch(err => {
-            console.log("erorr:"+err)
-        }).finally(() => {
-            console.log("Finalizo el pedido")
+            console.log(item)
         })
-}, [id])
+        .catch(error => {
+            console.log(error)
+        })
+    } , [id])
+
     if (loading) {
         return (
             <>
-                <ItemDetail item={item} />
+                <ItemDetail item={item} />            
             </>
         )
     } else {

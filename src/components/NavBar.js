@@ -7,7 +7,7 @@ const NavBar = ({type}) => {
 
     
 
-    if(type == "header"){
+    if(type === "header"){
         return (
             <>
             <div className="collapse navbar-collapse" id="navbarNavDropdown">

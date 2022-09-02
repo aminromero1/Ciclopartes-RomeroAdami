@@ -7,7 +7,7 @@ function CartWidget() {
 
     const { cantidad } = useCarrito();
 
-    
+
     if(cantidad > 0) {
         return (
             <NavLink to="/cart">

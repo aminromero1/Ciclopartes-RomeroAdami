@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import ItemList from "./ItemList"
 import { useParams } from "react-router-dom"
+import { getProductsByCategory, getProducts } from "./products"
 
 const ItemListContainer = () => {
 
@@ -9,32 +10,28 @@ const ItemListContainer = () => {
 
     const { category } = useParams()
     console.log("categoria:"+category)
-    
-    useEffect(() => {
-        setLoading(true)
-        fetch('./arrayProductos.json',{
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            }
-        })
-            .then(response => {
-                console.log(response);
-                return response.json()
-            })
-            .then(res => {
-                if(category){
-                    setLoading(false)
-                    setListProduct(res.filter(producto => producto.category === category))
-                    console.log("pasa esto 1"+res)
-                }else{
-                    setLoading(false)
-                    setListProduct(res)
-                    console.log("pasa esto 2"+res)
-                }
-                console.log("pasa esto 3"+res)
 
+    useEffect(() => {
+        if(category === undefined){
+            getProducts()
+            .then(listProduct => {
+                setListProduct(listProduct)
+                setLoading(false)
+                console.log(listProduct)
+            }).catch(error => {
+                console.log(error)
+            }
+            )
+        }else{
+            getProductsByCategory(category)
+            .then(listProduct => {
+                setListProduct(listProduct)
+                setLoading(false)
+                console.log(listProduct)
+            }).catch(error => {
+                console.log(error)
             })
+        }
 
 }, [category])
     
