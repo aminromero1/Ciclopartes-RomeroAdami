@@ -44,9 +44,7 @@ const CustomProvider = (props) => {
     }
     
     const precioTotal = () => {
-        console.log(carrito.map((item) => {
-            return {total: item.precio * item.cantidad}
-        }))
+        return carrito.reduce((acc, item) => acc += item.cantidad * item.price, 0)
     }
 
     const valorDelContexto = {
